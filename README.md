@@ -2,7 +2,7 @@
 
 Kay language - arbitrary precision decimal number library and examples.
 
-The decNumber functionality is linked by my Kay compiler as part of its standard library.
+The decNumber functionality is linked by my Kay (aka y3c) compiler as part of its standard library.
 The library is written in C and is available here: http://speleotrove.com
 The documentation is available here: http://speleotrove.com/decimal/decnumber.pdf
 

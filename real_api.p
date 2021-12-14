@@ -23,7 +23,7 @@ plexus number (
 	func ref free <> (number ref set),
 	//
 	// Since the these are lambdas, they need to be prototyped with ::
-  // because lambdas use our own ABI
+	// because lambdas use our own ABI
 	//
 	func ref printnth :: (number ref set, int n),
 	func ref printnthln :: (number ref set, int n),
@@ -81,7 +81,7 @@ lambda println (_dn) <- func {
 // each subsequent argument is expected to be a string
 // represending a decimal numerical value.
 //
-// the last parameter needs to 0 to signify end of arguments.
+// the last parameter needs to be 0 to signify end of arguments.
 //
 // Return a vector (array) of those numbers
 // each vector node contains the number and 
