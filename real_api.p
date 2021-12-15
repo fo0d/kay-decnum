@@ -49,28 +49,24 @@ signature func print :: (real.decNumber_api.decNumber ref dn)
 signature func println :: (real.decNumber_api.decNumber ref dn)
 
 lambda printnth (_ds, nth) <- func {
-	number ref ds
-	ds <- cast(_ds to number ref)
+	number ref ds <- cast(_ds to number ref)
 	call(io.printf, "%s", ds-->set[nth].string)
 }
 
 lambda printnthln (_ds, nth) <- func {
-	number ref ds
-	ds <- cast(_ds to number ref)
+	number ref ds <- cast(_ds to number ref)
 	call(io.printf, "%s\n", ds-->set[nth].string)
 }
 
 lambda print (_dn) <- func {
-	real.decNumber_api.decNumber ref dn
+	real.decNumber_api.decNumber ref dn  <- cast(_dn to real.decNumber_api.decNumber ref)
 	byte string[256]
-	dn <- cast(_dn to real.decNumber_api.decNumber ref)
 	call(io.printf, "%s", call(real.decNumber_api.decNumberToString, dn, string))
 }
 
 lambda println (_dn) <- func {
-	real.decNumber_api.decNumber ref dn
+	real.decNumber_api.decNumber ref dn <- cast(_dn to real.decNumber_api.decNumber ref)
 	byte string[256]
-	dn <- cast(_dn to real.decNumber_api.decNumber ref)
 	call(io.printf, "%s\n", call(real.decNumber_api.decNumberToString, dn, string))
 }
 
