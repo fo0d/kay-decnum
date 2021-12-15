@@ -20,8 +20,8 @@ as -o real_api.o real_api.s
 as -o driver.o driver.s
 ld -z execstack -o p.out /usr/local/musl/lib/crt1.o /usr/y3c/lib/crrts.o driver.o real_api.o /usr/y3c/libapi/api_sys/libdecnum_api.o /usr/y3c/libapi/api_sys/decApiInit.o /usr/y3c/libapi/api_sys/decContext_api.o /usr/y3c/libapi/api_sys/stdio_api.o /usr/y3c/libapi/api_sys/signal_api.o /usr/y3c/libapi/api_sys/decNumber_api.o /usr/y3c/libapi/api_sys/decDouble_api.o /usr/y3c/libapi/api_sys/decQuad_api.o /usr/y3c/libapi/api_sys/decGeneric.o /usr/y3c/libapi/api_sys/decimal128_api.o /usr/y3c/libapi/api_sys/decimal64_api.o /usr/y3c/libapi/api_sys/decimal32_api.o /usr/y3c/libapi/api_sys/decPacked_api.o /usr/y3c/libapi/api_sys/decSingle_api.o /usr/y3c/libapi/api_sys/stdlib_api.o /usr/y3c/libapi/api_sys/string_api.o /usr/y3c/lib/libsys.a /usr/y3c/lib/libdecnum.a /usr/local/musl/lib/libc.a
 % ./p.out
-1
-2
-1
-2
-numbers are: 1 2
+1.1272172312
+2.1312123787
+1.1272172312
+2.1312123787
+numbers are: 1.1272172312 2.1312123787
