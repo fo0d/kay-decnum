@@ -138,8 +138,7 @@ func initialize_real_set43 :: number ref (byte ref args, ...) {
 }
 
 lambda deinitialize_real_set43(_decset) <- func {
-	number ref ds
-	ds <- cast(_decset to number ref)
+	number ref ds <- cast(_decset to number ref)
 	call(lib.free, cast(ds-->set to byte ref))
 	call(lib.free, cast(ds-->context to byte ref))
 	call(lib.free, cast(ds to byte ref))
