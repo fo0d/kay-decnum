@@ -12,7 +12,7 @@ use stdio_api as io
 signature plexus number
 
 plexus numset_t (
-	real.decNumber_api.decNumber dn,
+	real.decQuad_api.decQuad dn,
 	byte string[256]
 )
 
@@ -27,8 +27,8 @@ plexus number (
 	//
 	func ref printnth :: (number ref set, int n),
 	func ref printnthln :: (number ref set, int n),
-	func ref print :: (real.decNumber_api.decNumber ref dn),
-	func ref println :: (real.decNumber_api.decNumber ref dn)
+	func ref print :: (real.decQuad_api.decQuad ref dn),
+	func ref println :: (real.decQuad_api.decQuad ref dn)
 )
 
 //
@@ -45,8 +45,8 @@ signature func init_real_set43 :: number ref (byte ref args, ...)
 //
 signature func printnth :: (number ref _ds, int nth)
 signature func printnthln :: (number ref _ds, int nth)
-signature func print :: (real.decNumber_api.decNumber ref dn)
-signature func println :: (real.decNumber_api.decNumber ref dn)
+signature func print :: (real.decQuad_api.decQuad ref dn)
+signature func println :: (real.decQuad_api.decQuad ref dn)
 
 lambda printnth (_ds, nth) <- func {
 	number ref ds <- cast(_ds to number ref)
@@ -59,15 +59,15 @@ lambda printnthln (_ds, nth) <- func {
 }
 
 lambda print (_dn) <- func {
-	real.decNumber_api.decNumber ref dn  <- cast(_dn to real.decNumber_api.decNumber ref)
+	real.decQuad_api.decQuad ref dn  <- cast(_dn to real.decQuad_api.decQuad ref)
 	byte string[256]
-	call(io.printf, "%s", call(real.decNumber_api.decNumberToString, dn, string))
+	call(io.printf, "%s", call(real.decQuad_api.decQuadToString, dn, string))
 }
 
 lambda println (_dn) <- func {
-	real.decNumber_api.decNumber ref dn <- cast(_dn to real.decNumber_api.decNumber ref)
+	real.decQuad_api.decQuad ref dn <- cast(_dn to real.decQuad_api.decQuad ref)
 	byte string[256]
-	call(io.printf, "%s\n", call(real.decNumber_api.decNumberToString, dn, string))
+	call(io.printf, "%s\n", call(real.decQuad_api.decQuadToString, dn, string))
 }
 
 //
@@ -110,7 +110,7 @@ func initialize_real_set43 :: number ref (byte ref args, ...) {
 			va <- va + 1
 
 			call(str.memmove, ds-->set[i].string, s, call(str.strlen, s)) // gets the null as well
-			call(real.decNumber_api.decNumberFromString, addr ds-->set[i].dn, s, ds-->context)
+			call(real.decQuad_api.decQuadFromString, addr ds-->set[i].dn, s, ds-->context)
 
 			i <- i + 1
 

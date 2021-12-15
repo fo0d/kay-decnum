@@ -9,7 +9,7 @@ use stdio_api as io
 func main <> () {
 	real.number ref numbers
 
-	numbers <- call(real.initialize_real_set43, "1", "2", 0)
+	numbers <- call(real.initialize_real_set43, "1.1272172312", "2.1312123787", 0)
 	
 	call(numbers-->printnthln, numbers, 0)
 	call(numbers-->printnthln, numbers, 1)
