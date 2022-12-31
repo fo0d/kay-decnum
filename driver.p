@@ -9,12 +9,12 @@ use stdio_api as io
 func main <> () {
 	real.number ref numbers
 
-	numbers <- call(real.initialize_real_set43, "1.1272172312", "2.1312123787", 0)
+	numbers <- ::(real.initialize_real_set43, "1.1272172312", "2.1312123787", 0)
 	
-	call(numbers-->printnthln, numbers, 0)
-	call(numbers-->printnthln, numbers, 1)
-	call(numbers-->println, addr numbers-->set[0].dn)
-	call(numbers-->println, addr numbers-->set[1].dn)
-	call(io.printf, "numbers are: %s %s\n", numbers-->set[0].string, numbers-->set[1].string)
-	call(real.deinitialize_real_set43, numbers)
+	::(numbers-->printnthln, numbers, 0)
+	::(numbers-->printnthln, numbers, 1)
+	::(numbers-->println, addr numbers-->set[0].dn)
+	::(numbers-->println, addr numbers-->set[1].dn)
+	::(io.printf, "numbers are: %s %s\n", numbers-->set[0].string, numbers-->set[1].string)
+	::(real.deinitialize_real_set43, numbers)
 }

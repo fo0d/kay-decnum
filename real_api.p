@@ -25,49 +25,49 @@ plexus number (
 	// Since the these are lambdas, they need to be prototyped with ::
 	// because lambdas use our own ABI
 	//
-	func ref printnth :: (number ref set, int n),
-	func ref printnthln :: (number ref set, int n),
-	func ref print :: (real.decQuad_api.decQuad ref dn),
-	func ref println :: (real.decQuad_api.decQuad ref dn)
+	func ref printnth ::: (number ref set, int n),
+	func ref printnthln ::: (number ref set, int n),
+	func ref print ::: (real.decQuad_api.decQuad ref dn),
+	func ref println ::: (real.decQuad_api.decQuad ref dn)
 )
 
 //
 // The way we process the variable arguments is using our own ABI
 // since lambda are NOT linux-ABI specific. 
-// Hence the use of :: instead of <>
+// Hence the use of ::: instead of <>
 //
 
-signature func init_real_set43 :: number ref (byte ref args, ...)
+signature func init_real_set43 ::: number ref (byte ref args, ...)
 
 //
 // If we provide signatures to lambdas then
-// it allows us to not cast arguments when calling the lambdas.
+// it allows us to not cast arguments when ::ing the lambdas.
 //
-signature func printnth :: (number ref _ds, int nth)
-signature func printnthln :: (number ref _ds, int nth)
-signature func print :: (real.decQuad_api.decQuad ref dn)
-signature func println :: (real.decQuad_api.decQuad ref dn)
+signature func printnth ::: (number ref _ds, int nth)
+signature func printnthln ::: (number ref _ds, int nth)
+signature func print ::: (real.decQuad_api.decQuad ref dn)
+signature func println ::: (real.decQuad_api.decQuad ref dn)
 
 lambda printnth (_ds, nth) <- func {
 	number ref ds <- cast(_ds to number ref)
-	call(io.printf, "%s", ds-->set[nth].string)
+	::(io.printf, "%s", ds-->set[nth].string)
 }
 
 lambda printnthln (_ds, nth) <- func {
 	number ref ds <- cast(_ds to number ref)
-	call(io.printf, "%s\n", ds-->set[nth].string)
+	::(io.printf, "%s\n", ds-->set[nth].string)
 }
 
 lambda print (_dn) <- func {
 	real.decQuad_api.decQuad ref dn  <- cast(_dn to real.decQuad_api.decQuad ref)
 	byte string[256]
-	call(io.printf, "%s", call(real.decQuad_api.decQuadToString, dn, string))
+	::(io.printf, "%s", ::(real.decQuad_api.decQuadToString, dn, string))
 }
 
 lambda println (_dn) <- func {
 	real.decQuad_api.decQuad ref dn <- cast(_dn to real.decQuad_api.decQuad ref)
 	byte string[256]
-	call(io.printf, "%s\n", call(real.decQuad_api.decQuadToString, dn, string))
+	::(io.printf, "%s\n", ::(real.decQuad_api.decQuadToString, dn, string))
 }
 
 //
@@ -83,7 +83,7 @@ lambda println (_dn) <- func {
 // each vector node contains the number and 
 // its string represendation.
 //
-func initialize_real_set43 :: number ref (byte ref args, ...) {
+func initialize_real_set43 ::: number ref (byte ref args, ...) {
 	number ref ds
 	int ref ref va
 	int i <- 0
@@ -91,13 +91,13 @@ func initialize_real_set43 :: number ref (byte ref args, ...) {
 	byte ref s
 
 	closure setup_context <- {
-		ds <- cast(call(lib.malloc, capacity of (number)) to number ref)
-		ds-->context <- cast(call(lib.malloc, capacity of(real.decContext_api.decContext)) to real.decContext_api.decContext ref)
-		call(real.decApiInit.setDECUnits, 43)
-  	call(real.decApiInit.setDECflags)
-  	call(real.decApiInit.setDECgroupingFlags)
-  	call(real.decContext_api.decContextDefault, ds-->context, real.decContext_api.DEC_INIT_BASE)
-		ds-->set <- cast(call(lib.malloc, capacity of(numset_t) * n) to numset_t ref)
+		ds <- cast(::(lib.malloc, capacity of (number)) to number ref)
+		ds-->context <- cast(::(lib.malloc, capacity of(real.decContext_api.decContext)) to real.decContext_api.decContext ref)
+		::(real.decApiInit.setDECUnits, 43)
+  	::(real.decApiInit.setDECflags)
+  	::(real.decApiInit.setDECgroupingFlags)
+  	::(real.decContext_api.decContextDefault, ds-->context, real.decContext_api.DEC_INIT_BASE)
+		ds-->set <- cast(::(lib.malloc, capacity of(numset_t) * n) to numset_t ref)
 	}
 
 	closure init_numbers <- {
@@ -109,14 +109,14 @@ func initialize_real_set43 :: number ref (byte ref args, ...) {
 				done
 			va <- va + 1
 
-			call(str.memmove, ds-->set[i].string, s, call(str.strlen, s)) // gets the null as well
-			call(real.decQuad_api.decQuadFromString, addr ds-->set[i].dn, s, ds-->context)
+			::(str.memmove, ds-->set[i].string, s, ::(str.strlen, s)) // gets the null as well
+			::(real.decQuad_api.decQuadFromString, addr ds-->set[i].dn, s, ds-->context)
 
 			i <- i + 1
 
 			if i > n then {
 				n <- n * 2
-				ds-->set <- cast(call(lib.realloc, cast(ds-->set to byte ref), capacity of(numset_t) * n) to numset_t ref)
+				ds-->set <- cast(::(lib.realloc, cast(ds-->set to byte ref), capacity of(numset_t) * n) to numset_t ref)
 			}
 		}
 
@@ -139,7 +139,7 @@ func initialize_real_set43 :: number ref (byte ref args, ...) {
 
 lambda deinitialize_real_set43(_decset) <- func {
 	number ref ds <- cast(_decset to number ref)
-	call(lib.free, cast(ds-->set to byte ref))
-	call(lib.free, cast(ds-->context to byte ref))
-	call(lib.free, cast(ds to byte ref))
+	::(lib.free, cast(ds-->set to byte ref))
+	::(lib.free, cast(ds-->context to byte ref))
+	::(lib.free, cast(ds to byte ref))
 }
